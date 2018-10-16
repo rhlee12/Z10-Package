@@ -39,51 +39,38 @@ get.data=function(dp.id, site, month, save.dir){
     stop(paste0(dp.id, " is not available at ", site, " durring ", month))
   }
 
-  base.url="http://data.neonscience.org/api/v0/"
-
-  dp.meta=rjson::fromJSON(file=paste0(base.url, "products/", dp.id))$data
-
-  if(length(dp_meta)>0){
-    team_code=stringr::str_extract(string = dp_meta$productScienceTeam, pattern = "[:upper:]{3}")
+  dp.meta=Z10::get.dp.meta(dp.id)
+  if(length(dp.meta)>0){
+    team.code=stringr::str_extract(string = dp.meta$product.science.team, pattern = "[:upper:]{3}")
   }
 
-  dp_sites=unlist(lapply(dp_meta$siteCodes, "[[", "siteCode"))
-  if(site %in% dp_sites){
+  data.meta=rjson::fromJSON(file = paste0(base.url, "data/",  dp.id, "/", site, "/", month))$data
 
-    months_by_site=lapply(dp_meta$siteCodes, "[[", "availableMonths")
-    names(months_by_site)=dp_sites
+  file.names=lapply(data.meta$files, "[[", "name")
+  data.file.indx=intersect(grep(x=file.names, pattern = "basic"),
+                           grep(x=file.names, pattern = ".csv"))
 
-    valid_months=unlist(months_by_site[site])
-    if(!(month %in% valid_months)){stop(paste0(dp.id, " is not available at ", site, " durring ", month))}
-
-  }else{stop(paste0(dp.id, " is not available at ", site))}
-
-  data_meta=rjson::fromJSON(file = paste0(base.url, "data/",  dp.id, "/", site, "/", month))$data
-  file_names=lapply(data_meta$files, "[[", "name")
-  data_file_indx=intersect(grep(x=file_names, pattern = "basic"),
-                           grep(x=file_names, pattern = ".csv"))
-
-  if(team_code %in% c("TIS", "AIS")){
+  if(team.code %in% c("TIS", "AIS")){
     temp.agr="30"
-    data_file_indx=intersect(data_file_indx, grep(x=file_names, pattern = temp.agr))
+    data.file.indx=intersect(data.file.indx, grep(x=file.names, pattern = temp.agr))
   }
 
-  data_urls=unlist(lapply(data_meta$files, "[[", "url")[data_file_indx])
+  data.urls=unlist(lapply(data.meta$files, "[[", "url")[data.file.indx])
 
-  all_data=lapply(data_urls, function(x) as.data.frame(read.csv(as.character(x)), stringsAsFactors = F))
+  all.data=lapply(data.urls, function(x) as.data.frame(read.csv(as.character(x)), stringsAsFactors = F))
 
-  names(all_data)=unlist(file_names[data_file_indx])
+  names(all.data)=unlist(file.names[data.file.indx])
 
   if(!missing(save.dir)){
     (if(!dir.exists(save.dir)){stop("Invalid save.dir!")})
-    lapply(seq(length(all_data)), function(x) write.csv(
+    lapply(seq(length(all.data)), function(x) write.csv(
       x=x, file=paste0(
-        save.dir, "/", names(all_data[x])
+        save.dir, "/", names(all.data[x])
       )
     )
     )
   }
 
-  return(all_data)
+  return(all.data)
 }
 

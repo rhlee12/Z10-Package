@@ -11,7 +11,9 @@
 #' @return A list of named data frames
 #'
 #' @examples
+#' \dontrun{
 #' wind=dp.avail(dp.id = "DP1.00002.001")
+#' }
 
 #' @seealso Currently none
 

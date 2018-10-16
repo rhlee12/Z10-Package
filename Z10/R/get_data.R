@@ -32,15 +32,16 @@
 
 get.data=function(dp.id, site, month, save.dir){
 
+  # Check for data availability
   avail=Z10::dp.avail(dp.id = dp.id)
 
   if(!(month %in% unlist(avail$months[avail$site==site]))){
     stop(paste0(dp.id, " is not available at ", site, " durring ", month))
   }
 
-  base_url="http://data.neonscience.org/api/v0/"
+  base.url="http://data.neonscience.org/api/v0/"
 
-  dp_meta=rjson::fromJSON(file=paste0(base_url, "products/", dp.id))$data
+  dp.meta=rjson::fromJSON(file=paste0(base.url, "products/", dp.id))$data
 
   if(length(dp_meta)>0){
     team_code=stringr::str_extract(string = dp_meta$productScienceTeam, pattern = "[:upper:]{3}")
@@ -57,7 +58,7 @@ get.data=function(dp.id, site, month, save.dir){
 
   }else{stop(paste0(dp.id, " is not available at ", site))}
 
-  data_meta=rjson::fromJSON(file = paste0(base_url, "data/",  dp.id, "/", site, "/", month))$data
+  data_meta=rjson::fromJSON(file = paste0(base.url, "data/",  dp.id, "/", site, "/", month))$data
   file_names=lapply(data_meta$files, "[[", "name")
   data_file_indx=intersect(grep(x=file_names, pattern = "basic"),
                            grep(x=file_names, pattern = ".csv"))

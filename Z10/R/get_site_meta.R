@@ -6,15 +6,16 @@
 
 #' @description Return detailed NEON site metadata.
 #'
-#' @param \code{site} Parameter of class character.
+#' @param site Parameter of class character.
 #' The NEON site data should be downloaded for.
 
 #' @return A list of named data frames
 #'
 #' @examples
 #' \dontrun{
-#' cper=get.site.meta(site = "CPER")
+#' cper=Z10::get.site.meta(site = "CPER")
 #' }
+#' @export
 
 #' @seealso Currently none
 
@@ -25,12 +26,12 @@
 ##############################################################################################
 
 get.site.meta=function(site){
-  base_url="http://data.neonscience.org/api/v0/"
-  site.meta=rjson::fromJSON(file=paste0(base_url, "sites/", site))$data
+
+  site.meta=rjson::fromJSON(file=paste0("http://data.neonscience.org/api/v0/sites/", site))$data
 
   site.meta=site.meta[-which(names(site.meta)=="dataProducts")]
 
-  names(site.meta)=unlist(lapply(names(site.meta), function(x) Z10:::.camel.to.dot(x)))
+  names(site.meta)=unlist(lapply(names(site.meta), function(x) .camel.to.dot(x)))
 
   return(site.meta)
   }

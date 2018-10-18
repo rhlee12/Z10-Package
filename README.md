@@ -1,2 +1,2 @@
 # Z10-Package
-Lightweight NEON API interface
+Generate Ecological Statistics from NEON data

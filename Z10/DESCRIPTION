@@ -1,12 +1,12 @@
 Package: Z10
 Type: Package
-Title: A Simple Interface With The NEON API
+Title: A Simple Interface with the NEON API
 Version: 0.1.0
 Author: Robert Lee
 Maintainer: Robert Lee <rhlee@colorado.edu>
 Description: Z10 is a simple interface for v0 of the National Ecological Observatory Network (NEON) API. 
   With Z10, users can retrieve any dataset publicly hosted by NEON. Metadata for NEON sites and data products can be returned, as well as information on data product availability by site and date. 
-  For more information on NEON, please visit \url{https://www.neonscience.org}. For detailed data product information, please see the NEON data product catalog at \url{https://data.neonscience.org/data-product-catalog}.
+  For more information on NEON, please visit <https://www.neonscience.org>. For detailed data product information, please see the NEON data product catalog at <https://data.neonscience.org/data-product-catalog>.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

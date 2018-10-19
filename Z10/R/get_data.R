@@ -35,6 +35,7 @@
 
 
 get.data=function(dp.id, site, month, save.dir){
+options(stringsAsFactors = FALSE)
 
   # Check for data availability
   avail=Z10::dp.avail(dp.id = dp.id)
@@ -56,7 +57,7 @@ get.data=function(dp.id, site, month, save.dir){
 
   if(team.code %in% c("TIS", "AIS")){
     temp.agr="30"
-    data.file.indx=base::intersect(data.file.indx, grep(x=file.names, pattern = temp.agr))
+    data.file.indx=base::intersect(data.file.indx, grep(x=file.names, pattern = paste0("_", temp.agr)))
   }
 
   data.urls=base::unlist(base::lapply(data.meta$files, "[[", "url")[data.file.indx])

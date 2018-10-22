@@ -12,3 +12,17 @@
 
   return(dot.string)
 }
+
+.handle.dates=function(date.time){
+    out=as.POSIXct(gsub(x = date.time, pattern = "T|Z", replacement = " "), tz="UTC")
+    return(out)
+}
+
+.common.fields=function(df.list){
+    temp=unique(lapply(df.list, colnames))
+    if(length(temp)>1){
+    common=do.call(dplyr::intersect, temp)
+    out=lapply(df.list, function(x) x[,which(colnames(x) %in% common)])
+    }else{out=df.list}
+    return(out)
+}

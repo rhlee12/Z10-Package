@@ -12,7 +12,7 @@ The NEON site data should be downloaded for.}
 }
 \value{
 A list of min, mean and max temperature
-values at the site, in milimeters
+values at the site, in centigrade
 }
 \description{
 This function calculates the daily miniumum, mean, and maximum

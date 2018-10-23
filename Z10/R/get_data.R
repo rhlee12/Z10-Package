@@ -54,10 +54,11 @@ options(stringsAsFactors = FALSE)
   file.names=base::lapply(data.meta$files, "[[", "name")
   data.file.indx=base::intersect(grep(x=file.names, pattern = "basic"),
                            grep(x=file.names, pattern = ".csv"))
-
-  if(team.code %in% c("TIS", "AIS")){
+if(!(dp.id %in% c("DP1.00096.001", "DP1.00101.001", "DP1.00013.001"))){
+  if(team.code %in% c("TIS", "AIS")){ ## Need to fix this to hanlde funky TIS products like megapits, dust mass!
     temp.agr="30"
     data.file.indx=base::intersect(data.file.indx, grep(x=file.names, pattern = paste0("_", temp.agr)))
+  }
   }
 
   data.urls=base::unlist(base::lapply(data.meta$files, "[[", "url")[data.file.indx])

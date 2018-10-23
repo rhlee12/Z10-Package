@@ -2,6 +2,7 @@
 
 export(daily.precip.stats)
 export(daily.rad.stats)
+export(daily.soil.temp.stats)
 export(daily.temp.stats)
 export(dp.avail)
 export(dp.search)

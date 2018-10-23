@@ -26,3 +26,57 @@
     }else{out=df.list}
     return(out)
 }
+
+.sum.do.basic.stats=function(x, field.key){
+  merged.df=x
+
+  min=NA
+  max=NA
+  mean=NA
+
+  site.meta=get.site.meta(site)
+
+  if(nrow(merged.df)>1){
+
+    merged.df$endDateTime=.handle.dates(merged.df$endDateTime)
+
+    merged.df$endDateTime=lubridate::with_tz(merged.df$endDateTime, tzone = site.meta$location.properties$locationPropertyValue[site.meta$location.properties$locationPropertyName=="Value for Site Timezone"])
+
+    merged.df$day= cut(x=merged.df$endDateTime, breaks = "1 day")
+
+    mean=mean(unlist(lapply(unique(merged.df$day), function(d) sum(merged.df[merged.df$day==d, grepl(pattern = field.key, x = colnames(merged.df))], na.rm = T))))
+    min=min(unlist(lapply(unique(merged.df$day), function(d) sum(merged.df[merged.df$day==d, grepl(pattern = field.key, x = colnames(merged.df))], na.rm = T))))
+    max=max(unlist(lapply(unique(merged.df$day), function(d) sum(merged.df[merged.df$day==d, grepl(pattern = field.key, x = colnames(merged.df))], na.rm = T))))
+
+    out=c("minimum"=min, "mean"=mean, "maximum"=max)
+  }
+  return(c("minimum"=min, "mean"=mean, "maximum"=max))
+}
+
+.do.basic.stats=function(x, field.key){
+  merged.df=x
+
+  min=NA
+  max=NA
+  mean=NA
+
+  site.meta=get.site.meta(site)
+
+  if(nrow(merged.df)>1){
+
+    merged.df$endDateTime=.handle.dates(merged.df$endDateTime)
+
+    merged.df$endDateTime=lubridate::with_tz(merged.df$endDateTime, tzone = site.meta$location.properties$locationPropertyValue[site.meta$location.properties$locationPropertyName=="Value for Site Timezone"])
+
+    merged.df$day= cut(x=merged.df$endDateTime, breaks = "1 day")
+
+    mean=mean(unlist(lapply(unique(merged.df$day), function(d) merged.df[merged.df$day==d, grepl(pattern = field.key, x = colnames(merged.df))])), na.rm = T)
+    min=min(unlist(lapply(unique(merged.df$day), function(d) merged.df[merged.df$day==d, grepl(pattern = field.key, x = colnames(merged.df))])), na.rm = T)
+    max=max(unlist(lapply(unique(merged.df$day), function(d) merged.df[merged.df$day==d, grepl(pattern = field.key, x = colnames(merged.df))])), na.rm = T)
+
+    out=c("minimum"=min, "mean"=mean, "maximum"=max)
+  }
+  return(c("minimum"=min, "mean"=mean, "maximum"=max))
+}
+
+

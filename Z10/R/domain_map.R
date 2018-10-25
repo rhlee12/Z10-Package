@@ -6,6 +6,6 @@ domain.map=function(domain){
   pcip.avail=dp.avail(dp.id)
   domain.avail=pcip.avail[pcip.avail$site %in% domain.sites,]
 
-  lapply(Z10::daily.precip.stats())
+  lapply(domain.sites, Z10::daily.precip.stats)
 
 }

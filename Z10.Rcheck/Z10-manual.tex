@@ -1,0 +1,609 @@
+\nonstopmode{}
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8]{inputenc} % @SET ENCODING@
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `Z10'}}
+\par\bigskip{\large \today}
+\end{center}
+\begin{description}
+\raggedright{}
+\inputencoding{utf8}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{A Simple Interface with the NEON API}
+\item[Version]\AsIs{0.1.0}
+\item[Author]\AsIs{Robert Lee}
+\item[Maintainer]\AsIs{Robert Lee }\email{rhlee@colorado.edu}\AsIs{}
+\item[Description]\AsIs{Z10 is a simple interface for v0 of the National Ecological Observatory Network (NEON) API.
+With Z10, users can retrieve any dataset publicly hosted by NEON. Metadata for NEON sites and data products can be returned, as well as information on data product availability by site and date.
+For more information on NEON, please visit <https://www.neonscience.org>. For detailed data product information, please see the NEON data product catalog at <https://data.neonscience.org/data-product-catalog>.}
+\item[License]\AsIs{GPL-3}
+\item[Encoding]\AsIs{UTF-8}
+\item[LazyData]\AsIs{true}
+\item[RoxygenNote]\AsIs{6.1.0}
+\item[Depends]\AsIs{rjson, stringr, magrittr}
+\item[NeedsCompilation]\AsIs{no}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{daily.precip.totals}{Return daily precipitation statistics for a site}{daily.precip.totals}
+%
+\begin{Description}\relax
+This function calculates the daily miniumum, mean, and maximum
+precipitation values for a site over its period of record.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+daily.precip.totals(site, bgn.date, end.date)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+
+\item[\code{bgn.date}] Optional. The start date of the period to generate statistics for.
+If not supplied, the first date of NEON data will be used.
+
+\item[\code{end.date}] Optional. The end date of the period to generate statistics for.
+If not supplied, the last date of NEON data will be used.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of min, mean and max precipitaiton
+values at the site, in milimeters
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+cper=Z10::daily.precip.stats(site = "CPER")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{daily.rad.stats}{Return daily solar radiation statistics for a site}{daily.rad.stats}
+%
+\begin{Description}\relax
+This function calculates the daily daylight mean and maximum
+net solar radiation values for a site over the specified date range.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+daily.rad.stats(site, bgn.date, end.date)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+
+\item[\code{bgn.date}] Optional. The start date of the period to generate statistics for.
+If not supplied, the first date of NEON data will be used.
+
+\item[\code{end.date}] Optional. The end date of the period to generate statistics for.
+If not supplied, the last date of NEON data will be used.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Mean and maximum daylight net solar radiation values by date,
+in watts per meter squared.
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+cper=Z10::daily.rad.stats(site = "CPER")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{daily.soil.temp.mean}{Return daily soil temperature means by horizon}{daily.soil.temp.mean}
+%
+\begin{Description}\relax
+This function calculates the daily miniumum, mean, and maximum
+temperature values for a site over its period of record for soil sensors located
+in plot 1 of the site, at the lowest available instrument in each soil horizon.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+daily.soil.temp.mean(site, bgn.date, end.date)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+
+\item[\code{bgn.date}] Optional. The start date of the period to generate statistics for.
+If not supplied, the first date of NEON data will be used.
+
+\item[\code{end.date}] Optional. The end date of the period to generate statistics for.
+If not supplied, the last date of NEON data will be used.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A mean daily soil temperatures, by soil horizon, in degrees centigrade.
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+cper=Z10::daily.soil.temp.mean(site = "CPER")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{daily.temp.stats}{Return daily temperature statistics for a site}{daily.temp.stats}
+%
+\begin{Description}\relax
+This function calculates the daily miniumum, mean, and maximum
+temperature values for a site over its period of record.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+daily.temp.stats(site, bgn.date, end.date)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+
+\item[\code{bgn.date}] Optional. The start date of the period to generate statistics for.
+If not supplied, the first date of NEON data will be used.
+
+\item[\code{end.date}] Optional. The end date of the period to generate statistics for.
+If not supplied, the last date of NEON data will be used.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of min, mean and max temperature
+values at the site, in centigrade
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+cper=Z10::daily.temp.stats(site = "CPER")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{dp.avail}{Query for data product availability}{dp.avail}
+%
+\begin{Description}\relax
+Get dates of data product availability by NEON site.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+dp.avail(dp.id)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{dp.id}] Parameter of class character. The data product code in question. See
+\url{http://data.neonscience.org/data-product-catalog} for a complete list.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of named data frames
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+wind=Z10::dp.avail(dp.id = "DP1.00002.001")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{dp.search}{Return data product IDs based on a search keyword}{dp.search}
+%
+\begin{Description}\relax
+For a given keyword or search string, a data frame of possible
+data products will be returned. The search is performed against the data product names,
+not full data product descriptions.
+If the R session is interactive, candidate
+data product information will also print in the console.
+The data product IDs are used in other Z10 functions to return data.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+dp.search(keyword)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{keyword}] Parameter of class character.
+The search phrase used when searching through data product names.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A data frame of data product names and their associated data product IDs
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+names=Z10::dp.search(keyword="fish")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{get.data}{Download data for a specified data product}{get.data}
+%
+\begin{Description}\relax
+For the specified dates, site, package parameters,
+and data product or name of family of data products,
+data are downloaded and saved to the specifed directory.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get.data(dp.id, site, month, save.dir)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{dp.id}] Parameter of class character. The data product code in question.
+See \url{http://data.neonscience.org/data-product-catalog} for a complete list.
+
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+
+\item[\code{month}] Parameter of class character. The year-month (e.g. "2017-01")
+of the month to get data for.d, defaults to basic.
+
+\item[\code{save.dir}] Optional, parameter of class character.
+The local directory where data files should be saved.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of named data frames
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+cper_wind=Z10::get.data(site = "CPER", dp.id = "DP1.00002.001", month = "2017-04")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{get.dp.meta}{Return NEON data product metadata}{get.dp.meta}
+%
+\begin{Description}\relax
+Return detailed NEON data product metadata.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get.dp.meta(dp.id)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{dp.id}] Parameter of class character. The data product code in question.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Nested lists of data product metadata
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+wind_meta=get.dp.meta(dp.id = "DP1.00002.001")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{get.site.meta}{Return NEON site metadata}{get.site.meta}
+%
+\begin{Description}\relax
+Return detailed NEON site metadata.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get.site.meta(site)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of named data frames
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+cper=Z10::get.site.meta(site = "CPER")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{map}{Return daily precipitation statistics for a site}{map}
+%
+\begin{Description}\relax
+This function calculates the daily miniumum, mean, and maximum
+precipitation values for a site over its period of record.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+map(site)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of min, mean and max precipitaiton
+values at the site, in milimeters
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+cper=Z10::daily.precip.stats(site = "CPER")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{mat}{Return temperature statistics for a site over the period of record}{mat}
+%
+\begin{Description}\relax
+This function calculates the daily miniumum, mean, and maximum
+temperature values for a site over its period of record.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+mat(site)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of min, mean and max temperature
+values at the site, in centigrade
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+cper=Z10::mat(site = "CPER")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{site.litter.isotopes}{Return Mean Delta Values of Stable Isotopes in Litterfall}{site.litter.isotopes}
+%
+\begin{Description}\relax
+This function calculates the mean delta values for
+nitrogen-15 and carbon-13 isotopes over the period of record at a site.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+site.litter.isotopes(site)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of min, mean and max net solar radiation
+values at the site, in watts per meter squared
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+cper=Z10::site.litter.isotopes(site = "SCBI")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{summary.root.mass}{Return Mean Root Masses by Depth}{summary.root.mass}
+%
+\begin{Description}\relax
+This function summarizes the root masses from all live
+roots in 10 cm depth increments
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'root.mass'
+summary(site)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{site}] Parameter of class character.
+The NEON site data should be downloaded for.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Data frame of the average root mass measured in a given depth range
+\end{Value}
+%
+\begin{Author}\relax
+Robert Lee \email{rhlee@colorado.edu}\\{}
+\end{Author}
+%
+\begin{SeeAlso}\relax
+Currently none
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+SCBI=Z10::summary.root.mass(site = "SCBI")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\printindex{}
+\end{document}

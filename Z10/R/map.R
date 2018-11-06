@@ -26,30 +26,13 @@
 #
 ##############################################################################################
 
-daily.precip.stats=function(site, bgn.date, end.date){
+map=function(site){
   
   dp.id="DP1.00006.001"
   
   avail=dp.avail(dp.id)
   
   months=unlist(avail$months[avail$site==site])
-  
-  if(missing(bgn.date)){
-    bgn.date=paste0(months[1], "-01")
-  }
-  
-  if(missing(end.date)){
-    end.month=months[length(months)]
-    last.day=lubridate::days_in_month(as.Date(paste0(end.month, "-01")))
-    
-    end.date=paste0(end.month, "-", last.day)
-  }
-  
-  req.months=substr(seq.Date(from=as.Date(bgn.date), to=as.Date(end.date), by = '1 month'), start = 1, stop = 7)
-  
-  months=req.months[req.months %in% months]
-  
-  date.seq=seq.Date(from=as.Date(bgn.date), to=as.Date(end.date), by = "1 day")
   
   all=lapply(months, function(m) get.data(dp.id = dp.id, site = site, month = m))
   
@@ -66,19 +49,7 @@ daily.precip.stats=function(site, bgn.date, end.date){
   
   both=list(primary=pri.df, secondary=sec.df)
   
-  both=lapply(both, function(d) .dayify(d))
-  
-  temp=lapply(both, 
-              function(x) unlist(lapply(date.seq, 
-                                        function(d) mean(x[as.character(x$date)==d,grepl(pattern = "Bulk", x = colnames(x))], na.rm=T))
-              )
-  )
-  
-  out=temp
-  
-  out=data.frame(date.seq, data.frame(do.call(cbind, out)))
+  out=lapply(both, function(x) .sum.do.basic.stats(x, field.key="Bulk"))
   
   return(out)
 }
-
-

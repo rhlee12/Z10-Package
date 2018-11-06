@@ -1,0 +1,7 @@
+Hmm ... looks like a package
+Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
+  pdflatex is not available
+Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
+  pdflatex is not available
+Error in running tools::texi2pdf()
+You may want to clean up by 'rm -Rf /var/folders/40/1trr348n5dnc1ckbq9flcw20h07b30/T//RtmphuO0aF/Rd2pdf63593855faa6'

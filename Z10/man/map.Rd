@@ -2,7 +2,7 @@
 % Please edit documentation in R/map.R
 \name{map}
 \alias{map}
-\title{Return daily precipitation statistics for a site}
+\title{Return the Mean Annual Precipitation statistics for a site}
 \usage{
 map(site)
 }
@@ -20,7 +20,7 @@ precipitation values for a site over its period of record.
 }
 \examples{
 \dontrun{
-cper=Z10::daily.precip.stats(site = "CPER")
+cper=Z10::map(site = "CPER")
 }
 }
 \seealso{

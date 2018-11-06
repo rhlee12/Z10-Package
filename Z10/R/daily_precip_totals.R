@@ -1,10 +1,10 @@
 ############################################################################################
-#' @title Return daily precipitation statistics for a site
+#' @title Return daily precipitation totals for a site
 
 #' @author Robert Lee \email{rhlee@@colorado.edu}\cr
 
-#' @description This function calculates the daily miniumum, mean, and maximum
-#' precipitation values for a site over its period of record.
+#' @description This function calculates the daily precipitation totals over the
+#'  specified date range
 #'
 #' @param site Parameter of class character.
 #' The NEON site data should be downloaded for.
@@ -13,12 +13,13 @@
 #' @param end.date Optional. The end date of the period to generate statistics for.
 #'  If not supplied, the last date of NEON data will be used. 
 
-#' @return A list of min, mean and max precipitaiton
-#' values at the site, in milimeters
+#' @return A data frame of primary and secondary precipitation totals by date. 
+#' Totals are in millimeters.
 #'
 #' @examples
 #' \dontrun{
-#' cper=Z10::daily.precip.stats(site = "CPER")
+#' # Return the entire period of record at CPER
+#' cper=Z10::daily.precip.totals(site = "CPER")
 #' }
 #' @export
 
@@ -27,6 +28,8 @@
 # changelog and author contributions / copyrights
 #   Robert Lee (2018-10-19)
 #     original creation
+#   Robert Lee (2018-11-05)
+#     More granular data return and option to select period of data return
 #
 ##############################################################################################
 

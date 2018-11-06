@@ -21,6 +21,8 @@
 #' cper=Z10::daily.temp.stats(site = "CPER")
 #' }
 #' @export
+#' 
+#' @importFrom magrittr %>%
 
 #' @seealso Currently none
 
@@ -32,6 +34,7 @@
 
 daily.temp.stats=function(site, bgn.date, end.date){
 
+  
   dp.id="DP1.00002.001"
 
   avail=dp.avail(dp.id)

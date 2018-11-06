@@ -32,7 +32,7 @@ site.litter.isotopes=function(site){
 
     litter.sites=dp.avail(dp.id)
 
-    if(!(site %in% litter.sites$site)){stop(paste0("Letter stable isotopes is not available at ", site))}
+    if(!(site %in% litter.sites$site)){stop(paste0("Litter stable isotope data are not available at ", site))}
 
     all=lapply(litter.sites$months[litter.sites$site==site],
            function(m)

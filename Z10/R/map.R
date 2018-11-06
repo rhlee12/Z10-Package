@@ -1,5 +1,5 @@
 ############################################################################################
-#' @title Return daily precipitation statistics for a site
+#' @title Return the Mean Annual Precipitation statistics for a site
 
 #' @author Robert Lee \email{rhlee@@colorado.edu}\cr
 
@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' cper=Z10::daily.precip.stats(site = "CPER")
+#' cper=Z10::map(site = "CPER")
 #' }
 #' @export
 
@@ -50,6 +50,13 @@ map=function(site){
   both=list(primary=pri.df, secondary=sec.df)
   
   out=lapply(both, function(x) .sum.do.basic.stats(x, field.key="Bulk"))
+  
+  out=c(
+    "primary.map"=out$primary[2]*365.25,
+    "secondary.map"=out$secondary[2]*365.25
+  )
+  
+  if(!is.na(out[1])){out[2]=NA}
   
   return(out)
 }

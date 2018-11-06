@@ -1,10 +1,10 @@
 ############################################################################################
-#' @title Return daily solar radiation statistics for a site
+#' @title Return daily total radiation statistics for a site
 
 #' @author Robert Lee \email{rhlee@@colorado.edu}\cr
 
 #' @description This function calculates the daily daylight mean and maximum
-#' net solar radiation values for a site over the specified date range.
+#' total solar radiation values for a site over the specified date range.
 #'
 #' @param site Parameter of class character.
 #' The NEON site data should be downloaded for.
@@ -13,15 +13,18 @@
 #' @param end.date Optional. The end date of the period to generate statistics for.
 #'  If not supplied, the last date of NEON data will be used. 
 #'  
-#' @return Mean and maximum daylight net solar radiation values by date,
+#' @return Mean and maximum daylight total solar radiation values by date,
 #' in watts per meter squared.
 #'
 #' @examples
 #' \dontrun{
+#' # Return radiaiton stats for CPER over the summer solstice
 #' cper=Z10::daily.rad.stats(site = "CPER")
+#' # More information on the radiation data product used:
+#' Z10::get.dp.meta("DP1.00014.001")$product.abstract
 #' }
 #' @export
-
+#' @importFrom magrittr %>%
 #' @seealso Currently none
 
 # changelog and author contributions / copyrights
@@ -34,7 +37,7 @@
 
 daily.rad.stats=function(site, bgn.date, end.date){
   
-  dp.id="DP1.00023.001"
+  dp.id="DP1.00014.001"
   
   avail=dp.avail(dp.id)
   
@@ -62,10 +65,10 @@ daily.rad.stats=function(site, bgn.date, end.date){
   
   rad.df=data.frame(do.call(rbind, .common.fields(tower.top)), row.names = NULL)
   
-  rad.df=rad.df[which(rad.df$inSWMean>0),]
+  rad.df=rad.df[which(rad.df$gloRadMean>0),]
   
-  mean.rad=unlist(lapply(.dayify(df=.set.tz(rad.df, site = site)), function(d) mean(d[,"inSWMean"], na.rm=T)))
-  max.rad=unlist(lapply(.dayify(df=.set.tz(rad.df, site = site)), function(d) max(d[,"inSWMean"], na.rm=T)))
+  mean.rad=unlist(lapply(.dayify(df=.set.tz(rad.df, site = site)), function(d) mean(d[,"gloRadMean"], na.rm=T)))
+  max.rad=unlist(lapply(.dayify(df=.set.tz(rad.df, site = site)), function(d) max(d[,"gloRadMean"], na.rm=T)))
   
   data.frame("Date"=names(mean.rad), "Mean"=mean.rad, "Maximum"=max.rad) %>% `rownames<-`(NULL) -> out
   

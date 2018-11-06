@@ -2,7 +2,7 @@
 % Please edit documentation in R/daily_precip_totals.R
 \name{daily.precip.totals}
 \alias{daily.precip.totals}
-\title{Return daily precipitation statistics for a site}
+\title{Return daily precipitation totals for a site}
 \usage{
 daily.precip.totals(site, bgn.date, end.date)
 }
@@ -17,16 +17,17 @@ If not supplied, the first date of NEON data will be used.}
 If not supplied, the last date of NEON data will be used.}
 }
 \value{
-A list of min, mean and max precipitaiton
-values at the site, in milimeters
+A data frame of primary and secondary precipitation totals by date. 
+Totals are in millimeters.
 }
 \description{
-This function calculates the daily miniumum, mean, and maximum
-precipitation values for a site over its period of record.
+This function calculates the daily precipitation totals over the
+ specified date range
 }
 \examples{
 \dontrun{
-cper=Z10::daily.precip.stats(site = "CPER")
+# Return the entire period of record at CPER
+cper=Z10::daily.precip.totals(site = "CPER")
 }
 }
 \seealso{

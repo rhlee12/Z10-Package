@@ -1,9 +1,9 @@
 ############################################################################################
-#' @title Return temperature statistics for a site over the period of record
+#' @title Return the Mean Annual Temperature at a site
 
 #' @author Robert Lee \email{rhlee@@colorado.edu}\cr
 
-#' @description This function calculates the daily miniumum, mean, and maximum
+#' @description This function calculates the miniumum, mean, and maximum
 #' temperature values for a site over its period of record.
 #'
 #' @param site Parameter of class character.

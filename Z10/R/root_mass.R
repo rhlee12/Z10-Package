@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' SCBI=Z10::summary.root.mass(site = "SCBI")
+#' SCBI=Z10::root.mass(site = "SCBI")
 #' }
 #' @export
 
@@ -25,7 +25,7 @@
 #
 ##############################################################################################
 
-summary.root.mass=function(site){
+root.mass=function(site){
   
   dp.id="DP1.10066.001"
   

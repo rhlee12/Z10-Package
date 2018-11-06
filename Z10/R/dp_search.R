@@ -39,9 +39,9 @@ dp.search=function(keyword){
 
   out=ref.set[grepl(pattern = tolower(keyword), x = ref.set$dp.name, ignore.case = TRUE),]
 
-  if(interactive()){
-    message("Possible data products:")
-    message(paste0(out$dp.name, ": ", out$dp.id, collapse = "\n "))
-  }
+  # if(interactive()){
+  #   message("Possible data products:")
+  #   message(paste0(out$dp.name, ": ", out$dp.id, collapse = "\n "))
+  # }
   return(out)
 }

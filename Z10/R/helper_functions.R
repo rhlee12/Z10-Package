@@ -30,7 +30,7 @@
 }
 
 #Function to get sums on a flat data frame
-.sum.do.basic.stats=function(x, field.key){
+.sum.do.basic.stats=function(x, field.key, site){
   merged.df=x
   
   min=NA
@@ -57,7 +57,7 @@
 }
 
 # function to get min/max/mean on a flat data frame
-.do.basic.stats=function(x, field.key){
+.do.basic.stats=function(x, field.key, site){
   merged.df=x
   
   min=NA

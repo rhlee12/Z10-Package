@@ -2,7 +2,7 @@
 % Please edit documentation in R/MAT.R
 \name{mat}
 \alias{mat}
-\title{Return temperature statistics for a site over the period of record}
+\title{Return the Mean Annual Temperature at a site}
 \usage{
 mat(site)
 }
@@ -15,7 +15,7 @@ A list of min, mean and max temperature
 values at the site, in centigrade
 }
 \description{
-This function calculates the daily miniumum, mean, and maximum
+This function calculates the miniumum, mean, and maximum
 temperature values for a site over its period of record.
 }
 \examples{

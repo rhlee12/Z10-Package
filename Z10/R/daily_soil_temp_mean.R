@@ -23,6 +23,9 @@
 #' @export
 
 #' @seealso Currently none
+#' 
+#' @importFrom magrittr %>%
+
 
 # changelog and author contributions / copyrights
 #   Robert Lee (2018-10-23)
@@ -33,6 +36,8 @@
 ##############################################################################################
 
 daily.soil.temp.mean=function(site,  bgn.date, end.date){
+
+  
   mp.id="DP1.00096.001"
   dp.id="DP1.00041.001"
   mp.avail=dp.avail(mp.id)

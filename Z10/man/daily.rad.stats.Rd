@@ -2,7 +2,7 @@
 % Please edit documentation in R/daily_rad_stats.R
 \name{daily.rad.stats}
 \alias{daily.rad.stats}
-\title{Return daily solar radiation statistics for a site}
+\title{Return daily total radiation statistics for a site}
 \usage{
 daily.rad.stats(site, bgn.date, end.date)
 }
@@ -17,16 +17,19 @@ If not supplied, the first date of NEON data will be used.}
 If not supplied, the last date of NEON data will be used.}
 }
 \value{
-Mean and maximum daylight net solar radiation values by date,
+Mean and maximum daylight total solar radiation values by date,
 in watts per meter squared.
 }
 \description{
 This function calculates the daily daylight mean and maximum
-net solar radiation values for a site over the specified date range.
+total solar radiation values for a site over the specified date range.
 }
 \examples{
 \dontrun{
+# Return radiaiton stats for CPER over the summer solstice
 cper=Z10::daily.rad.stats(site = "CPER")
+# More information on the radiation data product used:
+Z10::get.dp.meta("DP1.00014.001")$product.abstract
 }
 }
 \seealso{

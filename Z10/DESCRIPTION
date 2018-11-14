@@ -4,8 +4,8 @@ Title: Simple Ecological Statistics from the NEON Network
 Version: 0.1.0
 Author: Robert Lee
 Maintainer: Robert Lee <rhlee@colorado.edu>
-Description: This package provides simple statistics from instruments and obeserbvations at sites in the NEON network, and acts as a simple interface for v0 of the National Ecological Observatory Network (NEON) API.
-  Statisitcs are generated for meterologic and soil-based observations. Statistics are presented for daily, annual, and one-time observations.
+Description: Provides simple statistics from instruments and observations at sites in the NEON network, and acts as a simple interface for v0 of the National Ecological Observatory Network (NEON) API.
+  Statistics are generated for meteorologic and soil-based observations, and are presented for daily, annual, and one-time observations at all available NEON sites.
   Users can also retrieve any dataset publicly hosted by NEON. Metadata for NEON sites and data products can be returned, as well as information on data product availability by site and date. 
   For more information on NEON, please visit <https://www.neonscience.org>. For detailed data product information, please see the NEON data product catalog at <https://data.neonscience.org/data-product-catalog>.
 License: GPL-3
@@ -13,4 +13,4 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
 Imports: rjson, stringr, magrittr, lubridate, dplyr
-Suggests: RNRCS, metScanR, rnoaa
+Suggests: RNRCS, metScanR, rnoaa, neonUtilities

@@ -14,3 +14,6 @@ LazyData: true
 RoxygenNote: 6.1.1
 Imports: rjson, stringr, magrittr, lubridate, dplyr
 Suggests: RNRCS, metScanR, rnoaa, neonUtilities
+NeedsCompilation: no
+Packaged: 2019-01-18 22:20:09 UTC; rlee
+Built: R 3.5.1; ; 2019-01-18 22:20:15 UTC; unix

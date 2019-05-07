@@ -49,8 +49,7 @@ options(stringsAsFactors = FALSE)
     team.code=stringr::str_extract(string = dp.meta$product.science.team, pattern = "[:upper:]{3}")
   }
 
-  data.meta= httr::content(httr::GET(url = base::paste0("https://data.neonscience.org/api/v0/data/",  dp.id, "/", site, "/", month)))$data
-  #data.meta=rjson::fromJSON(file = base::paste0("https://data.neonscience.org/api/v0/data/",  dp.id, "/", site, "/", month))$data
+  data.meta=rjson::fromJSON(file = base::paste0("http://data.neonscience.org/api/v0/data/",  dp.id, "/", site, "/", month))$data
 
   file.names=base::lapply(data.meta$files, "[[", "name")
   data.file.indx=base::intersect(grep(x=file.names, pattern = package),

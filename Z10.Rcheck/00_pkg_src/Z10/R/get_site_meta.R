@@ -27,11 +27,11 @@
 
 get.site.meta=function(site){
 
-  site.meta=rjson::fromJSON(file=paste0("https://data.neonscience.org/api/v0/sites/", site))$data
+  site.meta=rjson::fromJSON(file=paste0("http://data.neonscience.org/api/v0/sites/", site))$data
 
   site.meta=site.meta[-which(names(site.meta)=="dataProducts")]
 
-  site.meta=append(site.meta, rjson::fromJSON(file=paste0("https://data.neonscience.org/api/v0/locations/", site))$data)
+  site.meta=append(site.meta, rjson::fromJSON(file=paste0("http://data.neonscience.org/api/v0/locations/", site))$data)
 
   names(site.meta)=unlist(lapply(names(site.meta), function(x) .camel.to.dot(x)))
 

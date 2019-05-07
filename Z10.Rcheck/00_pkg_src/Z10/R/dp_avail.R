@@ -29,7 +29,7 @@ dp.avail=function(dp.id){
 
     avail=data.frame(
       do.call(rbind,
-              rjson::fromJSON(file = paste0("https://data.neonscience.org/api/v0/products/", dp.id))$data$siteCodes)
+              rjson::fromJSON(file = paste0("http://data.neonscience.org/api/v0/products/", dp.id))$data$siteCodes)
       )[,1:2]
 
     colnames(avail)=c("site", "months")

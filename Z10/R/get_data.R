@@ -31,6 +31,8 @@
 #     original creation
 #   Robert Lee (2018-10-15)
 #     Formatted for Z10
+#   Robert Lee (2019-05-07)
+#     httr:: GET to fix api error
 ##############################################################################################
 
 

@@ -4,7 +4,7 @@
 \alias{get.data}
 \title{Download data for a specified data product}
 \usage{
-get.data(dp.id, site, month, save.dir, package = "basic")
+get.data(dp.id, site, month, save.dir = NULL, package = "basic")
 }
 \arguments{
 \item{dp.id}{Parameter of class character. The data product code in question.
@@ -18,6 +18,10 @@ of the month to get data for.d, defaults to basic.}
 
 \item{save.dir}{Optional, parameter of class character.
 The local directory where data files should be saved.}
+
+\item{package}{Optional, parameter of class character.
+The package type to return (either 'basic' or 'expanded'). Basic returns only key data, such as
+mean, min, and max values while expaneded returns additional data quality information.}
 }
 \value{
 A list of named data frames

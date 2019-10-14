@@ -35,6 +35,7 @@ mat=function(site){
   months=unlist(avail$months[avail$site==site])
 
   all=lapply(months, function(m) get.data(dp.id = dp.id, site = site, month = m))
+  names(all)=months
 
   flat=unlist(all, recursive = FALSE)
 
@@ -42,7 +43,7 @@ mat=function(site){
 
   temp.df=data.frame(do.call(rbind, .common.fields(ml2)), row.names = NULL)
 
-  out=.do.basic.stats(x=temp.df, field.key="tempSingleMean")
+  out=.do.basic.stats(x=temp.df, field.key="tempSingleMean", site=site)
 
   return(out)
 }

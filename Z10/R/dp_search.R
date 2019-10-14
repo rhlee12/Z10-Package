@@ -31,7 +31,10 @@
 ##############################################################################################
 
 dp.search=function(keyword){
-  dp.info=rjson::fromJSON(file="https://data.neonscience.org/api/v0/products/")$data
+  
+  dp.info=.api.return(url="https://data.neonscience.org/api/v0/products/")$data
+  
+  #dp.info=rjson::fromJSON(file="https://data.neonscience.org/api/v0/products/")$data
   dp.ids=unlist(lapply(dp.info, "[[", "productCode"))
   dp.names=unlist(lapply(dp.info, "[[", "productName"))
 

@@ -48,8 +48,8 @@ map=function(site){
   pri.df=data.frame(do.call(rbind, .common.fields(primary)), row.names = NULL)
   
   both=list(primary=pri.df, secondary=sec.df)
-  
-  out=lapply(both, function(x) .sum.do.basic.stats(x, field.key="Bulk"))
+  # browser()
+  out=lapply(both, function(x) .sum.do.basic.stats(x, field.key="Bulk", site=site))
   
   out=c(
     "primary.map"=out$primary[2]*365.25,

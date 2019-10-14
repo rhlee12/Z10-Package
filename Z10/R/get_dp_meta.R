@@ -26,7 +26,8 @@
 
 get.dp.meta=function(dp.id){
 
-  dp.meta=rjson::fromJSON(file=paste0("https://data.neonscience.org/api/v0/products/", dp.id))$data
+  #dp.meta=rjson::fromJSON(file=paste0("https://data.neonscience.org/api/v0/products/", dp.id))$data
+  dp.meta=.api.return(url=paste0("https://data.neonscience.org/api/v0/products/", dp.id))$data
   names(dp.meta)=unlist(lapply(names(dp.meta), function(x) .camel.to.dot(x)))
   return(dp.meta)
 }

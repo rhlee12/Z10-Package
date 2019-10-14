@@ -15,6 +15,9 @@
 #' of the month to get data for.d, defaults to basic.
 #' @param save.dir Optional, parameter of class character.
 #' The local directory where data files should be saved.
+#' @param package Optional, parameter of class character.
+#' The package type to return (either 'basic' or 'expanded'). Basic returns only key data, such as
+#' mean, min, and max values while expaneded returns additional data quality information.
 
 #' @return A list of named data frames
 #'
@@ -36,44 +39,45 @@
 ##############################################################################################
 
 
-get.data=function(dp.id, site, month, save.dir, package="basic"){
-options(stringsAsFactors = FALSE)
-
+get.data=function(dp.id, site, month, save.dir=NULL, package="basic"){
+  options(stringsAsFactors = FALSE)
+  
   # Check for data availability
   avail=Z10::dp.avail(dp.id = dp.id)
-
+  
   if(!(month %in% unlist(avail$months[avail$site==site]))){
     stop(paste0(dp.id, " is not available at ", site, " durring ", month))
   }
-
+  
   dp.meta=Z10::get.dp.meta(dp.id)
   if(length(dp.meta)>0){
     team.code=stringr::str_extract(string = dp.meta$product.science.team, pattern = "[:upper:]{3}")
   }
-
-  data.meta= httr::content(httr::GET(url = base::paste0("https://data.neonscience.org/api/v0/data/",  dp.id, "/", site, "/", month)))$data
+  
+  data.meta=.api.return(url = base::paste0("https://data.neonscience.org/api/v0/data/",  dp.id, "/", site, "/", month))$data
+  
   #data.meta=rjson::fromJSON(file = base::paste0("https://data.neonscience.org/api/v0/data/",  dp.id, "/", site, "/", month))$data
-
-  file.names=base::lapply(data.meta$files, "[[", "name")
+  #browser()
+  file.names=data.meta$files$name
   data.file.indx=base::intersect(grep(x=file.names, pattern = package),
-                           grep(x=file.names, pattern = ".csv"))
-if(!(dp.id %in% c("DP1.00096.001", "DP1.00101.001", "DP1.00013.001"))){
-  if(team.code %in% c("TIS", "AIS")){ ## Need to fix this to hanlde funky TIS products like megapits, dust mass!
-    temp.agr="30"
-    data.file.indx=base::intersect(data.file.indx, grep(x=file.names, pattern = paste0("_", temp.agr)))
+                                 grep(x=file.names, pattern = ".csv"))
+  if(!(dp.id %in% c("DP1.00096.001", "DP1.00101.001", "DP1.00013.001"))){
+    if(team.code %in% c("TIS", "AIS")){ ## Need to fix this to hanlde funky TIS products like megapits, dust mass!
+      temp.agr="30"
+      data.file.indx=base::intersect(data.file.indx, grep(x=file.names, pattern = paste0("_", temp.agr)))
+    }
   }
-  }
-
-  data.urls=base::unlist(base::lapply(data.meta$files, "[[", "url")[data.file.indx])
-
+  
+  data.urls=data.meta$files$url[data.file.indx]
+  
   all.data=base::lapply(data.urls,
                         function(x)
                           as.data.frame(utils::read.csv(as.character(x)), stringsAsFactors = F)
   )
-
+  
   names(all.data)=unlist(file.names[data.file.indx])
-
-  if(!missing(save.dir)){
+  
+  if(!is.null(save.dir)){
     (if(!dir.exists(save.dir)){stop("Invalid save.dir!")})
     lapply(seq(length(all.data)),
            function(x)
@@ -83,7 +87,7 @@ if(!(dp.id %in% c("DP1.00096.001", "DP1.00101.001", "DP1.00013.001"))){
                row.names=F)
     )
   }
-
+  
   return(all.data)
 }
 

@@ -26,7 +26,6 @@
 #' 
 #' @importFrom magrittr %>%
 
-
 # changelog and author contributions / copyrights
 #   Robert Lee (2018-10-23)
 #     original creation
@@ -43,7 +42,7 @@ daily.soil.temp.mean=function(site,  bgn.date, end.date){
   mp.avail=dp.avail(mp.id)
   
   if(missing(bgn.date)){
-    bgn.date=paste0(months[1], "-01")
+    bgn.date=paste0(mp.avail$months[1], "-01")
   }
   
   if(missing(end.date)){
@@ -61,6 +60,8 @@ daily.soil.temp.mean=function(site,  bgn.date, end.date){
   horizon.data=horizon.data[order(horizon.data$horizonTopDepth), ]
   
   meta=get.site.meta(site)
+  
+  
   
   sp1.sensors=rjson::fromJSON(
     file=rjson::fromJSON(

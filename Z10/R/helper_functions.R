@@ -38,12 +38,18 @@
 
 # Turn data frame into list of data frames by date ####
 .dayify=function(df){
+  if(any(!is.na(df$endDateTime))){
+    df$date=cut.Date(x=as.Date(substr(df$endDateTime, start = 1, 10)), breaks = "1 day")
+    
+    listed.df=split(x=df, f=df$date)
+    return(listed.df)
+  }
+  # else{
+  #   df=df$date=NA
+  #   listed.df=list(df)
+  # }
   
-  df$date=cut.Date(x=as.Date(substr(df$endDateTime, start = 1, 10)), breaks = "1 day")
-  
-  listed.df=split(x=df, f=df$date)
-  
-  return(listed.df)
+ 
 }
 
 # function to get min/max/mean on a flat data frame ####
@@ -168,6 +174,7 @@
 
 # Convert date-time columns from UTC to local time ####
 .set.tz=function(df, site){
+  
   site.meta=get.site.meta(site)
   siteLocInfo=site.meta$location.properties %>%
     `colnames<-`(value=.[1,]) %>%

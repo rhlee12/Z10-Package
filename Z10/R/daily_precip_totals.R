@@ -34,7 +34,7 @@
 ##############################################################################################
 
 daily.precip.totals=function(site, bgn.date, end.date){
-  
+  # browser()
   dp.id="DP1.00006.001"
   
   avail=dp.avail(dp.id)
@@ -65,21 +65,37 @@ daily.precip.totals=function(site, bgn.date, end.date){
   if(length(primary)==0){primary=list(temp=data.frame(endDateTime=NA, Bulk=NA))}
   
   both=list(
-    primary=data.frame(do.call(rbind, .common.fields(secondary)), row.names = NULL),
-    secondary=data.frame(do.call(rbind, .common.fields(primary)), row.names = NULL)
+    Pecondary=data.frame(do.call(rbind, .common.fields(secondary)), row.names = NULL),
+    Primary=data.frame(do.call(rbind, .common.fields(primary)), row.names = NULL)
   )
   
   day.slices=lapply(both, function(d) .dayify(.set.tz(df = d, site=site)))
-  
+  #browser()
   temp=lapply(day.slices, 
               function(l) data.frame(do.call(rbind, lapply(l, 
-                                                           function(d) sum(d[,grepl(pattern = "Bulk", x = colnames(d))], na.rm=T))), date=names(l)
+                                                           function(d) {
+                                                             #browser()
+                                                             if(!is.na(d)){
+                                                               sum(d[,grepl(pattern = "Bulk", x = colnames(d))], na.rm=T)
+                                                             }else{
+                                                               NA
+                                                             }
+                                                           }
+              )
+              ), date=names(l)
               )
   )
-  
-  out=merge(x=temp$primary, y=temp$secondary, by="date")
-  
-  colnames(out)=c("Date", "Primary", "Secondary")
+  #browser()
+  if(!is.null(temp$Secondary) & !is.null(temp$Primary)){
+    out=merge(x=temp$Primary, y=temp$Secondary, by="date")
+    
+    colnames(out)=c("Date", "Primary", "Secondary")
+  }else{
+    out=temp[lapply(temp, nrow)>0] %>%
+      unlist(recursive = F) %>%
+      as.data.frame() %>%
+      `colnames<-`(value=c(names(temp[lapply(temp, nrow)>0]), "Date"))
+  }
   
   return(out)
 }

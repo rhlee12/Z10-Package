@@ -2,6 +2,7 @@
 #' @title Return daily precipitation totals for a site
 
 #' @author Robert Lee \email{rhlee@@colorado.edu}\cr
+#' @author Cody Flagg \email{cody.flagg@@gmail.com}
 
 #' @description This function calculates the daily precipitation totals over the
 #'  specified date range

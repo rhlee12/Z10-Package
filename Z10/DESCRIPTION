@@ -2,7 +2,7 @@ Package: Z10
 Type: Package
 Title: Simple Ecological Statistics from the NEON Network
 Version: 0.1.5
-Author: Robert Lee <rhlee@colorado.edu>
+Authors: Robert Lee <rhlee@colorado.edu>, Cody Flagg <cody.flagg@gmail.com>
 Maintainer: Robert Lee <rhlee@colorado.edu>
 Description: Provides simple statistics from instruments and observations at sites in the NEON network, and acts as a simple interface for v0 of the National Ecological Observatory Network (NEON) API.
   Statistics are generated for meteorologic and soil-based observations, and are presented for daily, annual, and one-time observations at all available NEON sites.

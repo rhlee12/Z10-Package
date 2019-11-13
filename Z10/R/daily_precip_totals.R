@@ -65,7 +65,7 @@ daily.precip.totals=function(site, bgn.date, end.date){
   if(length(primary)==0){primary=list(temp=data.frame(endDateTime=NA, Bulk=NA))}
   
   both=list(
-    Pecondary=data.frame(do.call(rbind, .common.fields(secondary)), row.names = NULL),
+    Secondary=data.frame(do.call(rbind, .common.fields(secondary)), row.names = NULL),
     Primary=data.frame(do.call(rbind, .common.fields(primary)), row.names = NULL)
   )
   
@@ -75,10 +75,14 @@ daily.precip.totals=function(site, bgn.date, end.date){
               function(l) data.frame(do.call(rbind, lapply(l, 
                                                            function(d) {
                                                              #browser()
-                                                             if(!is.na(d)){
-                                                               sum(d[,grepl(pattern = "Bulk", x = colnames(d))], na.rm=T)
-                                                             }else{
-                                                               NA
+                                                             if(!is.null(d)){
+                                                               if(!all(is.na(d[,1]))){
+                                                                 sum(d[,grepl(pattern = "Bulk", x = colnames(d))], na.rm=T)
+                                                               }else{
+                                                                 # Return NA if date (`d`) is bereft of data
+                                                                 NA
+                                                               }
+                                                               
                                                              }
                                                            }
               )
@@ -86,7 +90,7 @@ daily.precip.totals=function(site, bgn.date, end.date){
               )
   )
   #browser()
-  if(!is.null(temp$Secondary) & !is.null(temp$Primary)){
+  if(nrow(temp$Secondary)>0 & nrow(temp$Primary)>0){
     out=merge(x=temp$Primary, y=temp$Secondary, by="date")
     
     colnames(out)=c("Date", "Primary", "Secondary")

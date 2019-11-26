@@ -35,10 +35,11 @@ dp.search=function(keyword){
   dp.info=.api.return(url="https://data.neonscience.org/api/v0/products/")$data
   
   #dp.info=rjson::fromJSON(file="https://data.neonscience.org/api/v0/products/")$data
-  dp.ids=unlist(lapply(dp.info, "[[", "productCode"))
-  dp.names=unlist(lapply(dp.info, "[[", "productName"))
-
-  ref.set=data.frame("dp.name"=dp.names, "dp.id"=dp.ids)
+  # dp.ids=unlist(lapply(dp.info, "[[", "productCode"))
+  # dp.names=unlist(lapply(dp.info, "[[", "productName"))
+  # 
+  # ref.set=data.frame("dp.name"=dp.names, "dp.id"=dp.ids)
+  ref.set=data.frame("dp.name"=dp.info$productName, "dp.id"=dp.info$productCode)
 
   out=ref.set[grepl(pattern = tolower(keyword), x = ref.set$dp.name, ignore.case = TRUE),]
 
